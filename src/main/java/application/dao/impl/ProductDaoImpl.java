@@ -1,10 +1,12 @@
-package application.dao;
+package application.dao.impl;
 
+import application.dao.ProductDao;
 import application.db.Storage;
 import application.lib.Dao;
 import application.model.Product;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 @Dao
 public class ProductDaoImpl implements ProductDao {
@@ -29,12 +31,9 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public Product update(Product product) {
-        List<Product> products = Storage.getProductList();
-        for (int i = 0; i < products.size(); i++) {
-            if (products.get(i).getId().equals(product.getId())) {
-                products.set(i, product);
-            }
-        }
+        IntStream.range(0, Storage.products.size())
+                .filter(i -> Storage.products.get(i).getId().equals(product.getId()))
+                .forEach(i -> Storage.products.set(i, product));
         return product;
     }
 

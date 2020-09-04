@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
+    public static List<Product> products = new ArrayList<>();
     private static List<Order> orders = new ArrayList<>();
-    private static List<Product> products = new ArrayList<>();
     private static List<ShoppingCart> shoppingCarts = new ArrayList<>();
     private static List<User> users = new ArrayList<>();
     private static Long orderId = 0L;
