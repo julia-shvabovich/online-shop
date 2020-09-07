@@ -2,11 +2,12 @@ package application.dao;
 
 import application.model.Order;
 import java.util.List;
+import java.util.Optional;
 
 public interface OrderDao {
     List<Order> getUserOrders(Long userId);
 
-    Order get(Long id);
+    Optional<Order> get(Long id);
 
     List<Order> getAll();
 

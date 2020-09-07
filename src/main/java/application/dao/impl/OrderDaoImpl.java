@@ -5,6 +5,7 @@ import application.db.Storage;
 import application.lib.Dao;
 import application.model.Order;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Dao
@@ -23,10 +24,10 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public Order get(Long id) {
+    public Optional<Order> get(Long id) {
         return Storage.getOrderList().stream()
                 .filter(order -> order.getId().equals(id))
-                .findFirst().get();
+                .findFirst();
     }
 
     @Override
