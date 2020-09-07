@@ -10,7 +10,6 @@ import java.util.stream.IntStream;
 
 @Dao
 public class ProductDaoImpl implements ProductDao {
-
     @Override
     public Product create(Product product) {
         Storage.addProduct(product);

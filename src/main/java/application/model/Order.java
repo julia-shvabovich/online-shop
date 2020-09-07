@@ -13,7 +13,7 @@ public class Order {
         this.userId = userId;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -35,5 +35,14 @@ public class Order {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{"
+                + "id=" + id
+                + ", products=" + products
+                + ", userId=" + userId
+                + '}';
     }
 }

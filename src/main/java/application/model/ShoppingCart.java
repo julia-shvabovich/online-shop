@@ -36,4 +36,13 @@ public class ShoppingCart {
     public void setUserId(Long userId) {
         this.userId = userId;
     }
+
+    @Override
+    public String toString() {
+        return "ShoppingCart{"
+                + "id=" + id
+                + ", products=" + products
+                + ", userId=" + userId
+                + '}';
+    }
 }
