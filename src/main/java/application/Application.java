@@ -88,9 +88,9 @@ public class Application {
         System.out.println(secondCart);
 
         System.out.println("Deleting cart:");
-        shoppingCartService.delete(secondCart);
+        shoppingCartService.delete(secondCart.getUserId());
         try {
-            System.out.println(shoppingCartService.getByUserId(2L));
+            System.out.println(shoppingCartService.get(2L));
         } catch (NoSuchElementException exception) {
             System.out.println("The cart does not exist");
         }
