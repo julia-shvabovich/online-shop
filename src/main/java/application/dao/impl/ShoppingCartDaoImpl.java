@@ -3,7 +3,6 @@ package application.dao.impl;
 import application.dao.ShoppingCartDao;
 import application.db.Storage;
 import application.lib.Dao;
-import application.model.Product;
 import application.model.ShoppingCart;
 import java.util.List;
 import java.util.Optional;
@@ -14,14 +13,6 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
     @Override
     public ShoppingCart create(ShoppingCart shoppingCart) {
         Storage.addCart(shoppingCart);
-        return shoppingCart;
-    }
-
-    @Override
-    public ShoppingCart addProduct(ShoppingCart shoppingCart, Product product) {
-        Storage.getShoppingCarts().stream()
-                .filter(cart -> cart.equals(shoppingCart))
-                .forEach(cart -> cart.getProducts().add(product));
         return shoppingCart;
     }
 
@@ -49,13 +40,5 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
     public boolean delete(ShoppingCart shoppingCart) {
         return Storage.getShoppingCarts().removeIf(cart -> cart.getId()
                 .equals(shoppingCart.getId()));
-    }
-
-    @Override
-    public boolean deleteProduct(ShoppingCart shoppingCart, Product product) {
-        Storage.getShoppingCarts().stream()
-                .filter(cart -> cart.equals(shoppingCart))
-                .forEach(cart -> cart.getProducts().remove(product));
-        return true;
     }
 }

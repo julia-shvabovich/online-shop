@@ -68,6 +68,7 @@ public class Application {
         ShoppingCartService shoppingCartService =
                 (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
         System.out.println("Creating shopping carts:");
+        userService.create(secondUser);
         ShoppingCart firstCart = new ShoppingCart(1);
         ShoppingCart secondCart = new ShoppingCart(2);
         shoppingCartService.create(firstCart);
@@ -77,26 +78,33 @@ public class Application {
 
         System.out.println("Adding products to existing carts:");
         shoppingCartService.addProduct(firstCart, cat);
+        shoppingCartService.addProduct(firstCart, julia);
         shoppingCartService.addProduct(secondCart, dog);
         System.out.println(firstCart);
         System.out.println(secondCart);
 
         System.out.println("Clearing cart:");
-        shoppingCartService.clear(firstCart);
-        System.out.println(firstCart);
+        shoppingCartService.clear(secondCart);
+        System.out.println(secondCart);
 
         System.out.println("Deleting cart:");
-        shoppingCartService.delete(firstCart);
+        shoppingCartService.delete(secondCart);
         try {
-            System.out.println(shoppingCartService.getByUserId(1L));
+            System.out.println(shoppingCartService.getByUserId(2L));
         } catch (NoSuchElementException exception) {
             System.out.println("The cart does not exist");
         }
 
         OrderService orderService = (OrderService) injector.getInstance(OrderService.class);
-        System.out.println("Completing order:");
-        Order order = orderService.completeOrder(secondCart);
+        System.out.println("Completing orders:");
+        Order order = orderService.completeOrder(firstCart);
         System.out.println(order);
 
+        System.out.println("Getting orders:");
+        System.out.println(orderService.getUserOrders(1L));
+
+        System.out.println("Deleting orders:");
+        orderService.delete(1L);
+        System.out.println(orderService.getUserOrders(1L));
     }
 }

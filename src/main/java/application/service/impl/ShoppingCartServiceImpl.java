@@ -7,7 +7,6 @@ import application.lib.Service;
 import application.model.Product;
 import application.model.ShoppingCart;
 import application.service.ShoppingCartService;
-import java.util.ArrayList;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
@@ -21,20 +20,24 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public ShoppingCart addProduct(ShoppingCart shoppingCart, Product product) {
-        return shoppingCartDao.addProduct(shoppingCart, product);
+        Storage.getShoppingCarts().stream()
+                .filter(cart -> cart.equals(shoppingCart))
+                .forEach(cart -> cart.getProducts().add(product));
+        return shoppingCart;
     }
 
     @Override
     public boolean deleteProduct(ShoppingCart shoppingCart, Product product) {
-        return shoppingCartDao.deleteProduct(shoppingCart, product);
+        Storage.getShoppingCarts().stream()
+                .filter(cart -> cart.equals(shoppingCart))
+                .forEach(cart -> cart.getProducts().remove(product));
+        return true;
     }
 
     @Override
     public void clear(ShoppingCart shoppingCart) {
-        Storage.getShoppingCarts().stream()
-                .filter(cart -> cart.equals(shoppingCart))
-                .forEach(cart -> cart.setProducts(new ArrayList<>()));
-
+        shoppingCart.getProducts().clear();
+        shoppingCartDao.update(shoppingCart);
     }
 
     @Override
