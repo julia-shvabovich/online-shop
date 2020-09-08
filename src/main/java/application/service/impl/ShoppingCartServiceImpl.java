@@ -1,7 +1,6 @@
 package application.service.impl;
 
 import application.dao.ShoppingCartDao;
-import application.db.Storage;
 import application.lib.Inject;
 import application.lib.Service;
 import application.model.Product;
@@ -20,17 +19,14 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public ShoppingCart addProduct(ShoppingCart shoppingCart, Product product) {
-        Storage.getShoppingCarts().stream()
-                .filter(cart -> cart.equals(shoppingCart))
-                .forEach(cart -> cart.getProducts().add(product));
-        return shoppingCart;
+        shoppingCart.getProducts().add(product);
+        return shoppingCartDao.update(shoppingCart);
     }
 
     @Override
     public boolean deleteProduct(ShoppingCart shoppingCart, Product product) {
-        Storage.getShoppingCarts().stream()
-                .filter(cart -> cart.equals(shoppingCart))
-                .forEach(cart -> cart.getProducts().remove(product));
+        shoppingCart.getProducts().remove(product);
+        shoppingCartDao.update(shoppingCart);
         return true;
     }
 
