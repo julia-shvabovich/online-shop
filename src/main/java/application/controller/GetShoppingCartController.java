@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 public class GetShoppingCartController extends HttpServlet {
     private static final Long USER_ID = 1L;
     private static final Injector injector = Injector.getInstance("application");
-    private ShoppingCartService shoppingCartService
-            = (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
+    private ShoppingCartService shoppingCartService =
+            (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
