@@ -23,7 +23,7 @@
                 <c:out value="${user.login}"/>
             </td>
             <td>
-                <a href="${pageContext.request.contextPath}/delete?id=${user.id}">Delete</a>
+                <a href="${pageContext.request.contextPath}/user/delete?id=${user.id}">Delete</a>
             </td>
         </tr>
     </c:forEach>
