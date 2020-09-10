@@ -1,6 +1,7 @@
 package application.controller;
 
 import application.lib.Injector;
+import application.model.ShoppingCart;
 import application.service.ShoppingCartService;
 import application.service.UserService;
 import java.io.IOException;
@@ -22,7 +23,8 @@ public class DeleteUserController extends HttpServlet {
             throws ServletException, IOException {
         Long id = Long.valueOf(req.getParameter("id"));
         userService.delete(id);
-        shoppingCartService.delete(id);
+        ShoppingCart cart = shoppingCartService.get(id);
+        shoppingCartService.delete(cart.getId());
         resp.sendRedirect(req.getContextPath() + "/user/all");
     }
 }
