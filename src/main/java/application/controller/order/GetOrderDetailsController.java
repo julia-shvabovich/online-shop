@@ -22,8 +22,8 @@ public class GetOrderDetailsController extends HttpServlet {
             throws ServletException, IOException {
         String orderId = req.getParameter("id");
         Long id = Long.valueOf(orderId);
-        List<Product> productsInOrder = orderService.get(id).getProducts();
-        req.setAttribute("products", productsInOrder);
+        List<Product> products = orderService.get(id).getProducts();
+        req.setAttribute("products", products);
         req.getRequestDispatcher("/WEB-INF/view/order/details.jsp").forward(req, resp);
     }
 }
