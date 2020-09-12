@@ -9,7 +9,7 @@
     Price <input type="text" name="price" required>
     <button type="submit">Add</button>
 </form>
-<a href="${pageContext.request.contextPath}/products/all">All products</a><br>
-<a href="${pageContext.request.contextPath}/">Main page</a><br>
+<a href="${pageContext.request.contextPath}/products/admin">All products</a><br>
+<a href="${pageContext.request.contextPath}/admin">Main page</a><br>
 </body>
 </html>

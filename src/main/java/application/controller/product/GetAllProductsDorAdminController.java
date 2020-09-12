@@ -1,4 +1,4 @@
-package application.controller;
+package application.controller.product;
 
 import application.lib.Injector;
 import application.model.Product;
@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/products/all")
-public class GetAllProductsController extends HttpServlet {
+@WebServlet("/products/admin")
+public class GetAllProductsDorAdminController extends HttpServlet {
     private static final Injector injector = Injector.getInstance("application");
     private ProductService productService
             = (ProductService) injector.getInstance(ProductService.class);
@@ -22,6 +22,6 @@ public class GetAllProductsController extends HttpServlet {
             throws ServletException, IOException {
         List<Product> products = productService.getAll();
         req.setAttribute("products", products);
-        req.getRequestDispatcher("/WEB-INF/view/product/all.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/view/product/admin.jsp").forward(req, resp);
     }
 }

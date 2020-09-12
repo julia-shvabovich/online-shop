@@ -1,4 +1,4 @@
-package application.controller;
+package application.controller.user;
 
 import application.lib.Injector;
 import application.model.User;
