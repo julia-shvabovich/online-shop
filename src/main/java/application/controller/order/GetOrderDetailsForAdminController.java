@@ -1,8 +1,8 @@
-package application.controller.product;
+package application.controller.order;
 
 import application.lib.Injector;
 import application.model.Product;
-import application.service.ProductService;
+import application.service.OrderService;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -11,17 +11,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/products/admin")
-public class GetAllProductsDorAdminController extends HttpServlet {
+@WebServlet("/admin/orders/details")
+public class GetOrderDetailsForAdminController extends HttpServlet {
     private static final Injector injector = Injector.getInstance("application");
-    private ProductService productService
-            = (ProductService) injector.getInstance(ProductService.class);
+    private final OrderService orderService = (OrderService) injector
+            .getInstance(OrderService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        List<Product> products = productService.getAll();
+        String orderId = req.getParameter("id");
+        Long id = Long.valueOf(orderId);
+        List<Product> products = orderService.get(id).getProducts();
         req.setAttribute("products", products);
-        req.getRequestDispatcher("/WEB-INF/view/product/admin.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/view/order/details-admin.jsp").forward(req, resp);
     }
 }

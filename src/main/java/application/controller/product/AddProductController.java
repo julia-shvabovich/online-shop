@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/products/add")
+@WebServlet("/admin/products/add")
 public class AddProductController extends HttpServlet {
     private static final Injector injector = Injector.getInstance("application");
     private ProductService productService =
@@ -28,6 +28,6 @@ public class AddProductController extends HttpServlet {
         String name = req.getParameter("name");
         long price = Long.parseLong(req.getParameter("price"));
         productService.create(new Product(name, price));
-        resp.sendRedirect(req.getContextPath() + "/products/add");
+        resp.sendRedirect(req.getContextPath() + "/admin/products/add");
     }
 }
