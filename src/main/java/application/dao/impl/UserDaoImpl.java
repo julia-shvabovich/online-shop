@@ -47,5 +47,4 @@ public class UserDaoImpl implements UserDao {
                 .filter(existingUser -> existingUser.getLogin().equals(login))
                 .findFirst();
     }
-
 }

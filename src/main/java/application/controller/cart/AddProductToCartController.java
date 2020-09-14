@@ -27,4 +27,3 @@ public class AddProductToCartController extends HttpServlet {
         resp.sendRedirect(req.getContentType() + "/product/all");
     }
 }
-//
