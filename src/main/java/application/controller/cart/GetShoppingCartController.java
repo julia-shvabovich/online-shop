@@ -1,4 +1,4 @@
-package application.controller;
+package application.controller.cart;
 
 import application.lib.Injector;
 import application.model.Product;
@@ -25,6 +25,6 @@ public class GetShoppingCartController extends HttpServlet {
         ShoppingCart shoppingCart = shoppingCartService.get(USER_ID);
         List<Product> allProducts = shoppingCart.getProducts();
         req.setAttribute("products", allProducts);
-        req.getRequestDispatcher("/WEB-INF/view/shoppingCart.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/view/cart/all.jsp").forward(req, resp);
     }
 }

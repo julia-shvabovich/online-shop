@@ -5,29 +5,30 @@
     <title>All users</title>
 </head>
 <body>
+<%@include file="../header-admin.jsp" %>
 <table border="1">
     <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Login</th>
+        <th><h4>ID</h4></th>
+        <th><h4>Name</h4></th>
+        <th><h4>Login</h4></th>
+        <th><h4>Delete</h4></th>
     </tr>
     <c:forEach var="user" items="${users}">
         <tr>
             <td>
-                <c:out value="${user.id}"/>
+                <h4><c:out value="${user.id}"/></h4>
             </td>
             <td>
-                <c:out value="${user.name}"/>
+                <h4><c:out value="${user.name}"/></h4>
             </td>
             <td>
-                <c:out value="${user.login}"/>
+                <h4><c:out value="${user.login}"/></h4>
             </td>
             <td>
-                <a href="${pageContext.request.contextPath}/user/delete?id=${user.id}">Delete</a>
+                <h4><a href="${pageContext.request.contextPath}/admin/user/delete?id=${user.id}">Delete</a></h4>
             </td>
         </tr>
     </c:forEach>
 </table>
-<a href="${pageContext.request.contextPath}/">Main page</a><br>
 </body>
 </html>

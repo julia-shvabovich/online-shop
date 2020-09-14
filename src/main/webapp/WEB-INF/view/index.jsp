@@ -4,11 +4,11 @@
     <title>Online shop</title>
 </head>
 <body>
+<%@include file="header.jsp"%>
 <h1>Welcome to the online shop!</h1>
-<a href="${pageContext.request.contextPath}/registration">Sign up</a><br>
-<a href="${pageContext.request.contextPath}/users/all">All users</a><br>
-<a href="${pageContext.request.contextPath}/products/all">All products</a><br>
-<a href="${pageContext.request.contextPath}/products/add">Add products</a><br>
-<a href="${pageContext.request.contextPath}/cart/products">Shopping cart</a><br>
+<h3>
+    <a href="${pageContext.request.contextPath}/products/all">All products</a><br>
+    <a href="${pageContext.request.contextPath}/orders/history">Orders history</a><br>
+</h3>
 </body>
 </html>

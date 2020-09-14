@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>All products</title>
+    <title>Order details</title>
 </head>
 <body>
 <%@include file="../header.jsp"%>
@@ -11,7 +11,6 @@
         <th><h4>ID</h4></th>
         <th><h4>Name</h4></th>
         <th><h4>Price</h4></th>
-        <th><h4>Buy</h4></th>
     </tr>
     <c:forEach var="product" items="${products}">
         <tr>
@@ -24,11 +23,9 @@
             <td>
                 <h4><c:out value="${product.price}"/></h4>
             </td>
-            <td>
-                <h4><a href="${pageContext.request.contextPath}/cart/add-product?id=${product.id}">Buy</a></h4>
-            </td>
         </tr>
     </c:forEach>
 </table>
+<h3><a href="${pageContext.request.contextPath}/orders/history">Orders history</a></h3>
 </body>
 </html>

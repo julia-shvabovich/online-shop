@@ -1,4 +1,4 @@
-package application.controller;
+package application.controller.user;
 
 import application.lib.Injector;
 import application.model.ShoppingCart;
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/user/delete")
+@WebServlet("/admin/user/delete")
 public class DeleteUserController extends HttpServlet {
     private static final Injector injector = Injector.getInstance("application");
     private UserService userService = (UserService) injector.getInstance(UserService.class);

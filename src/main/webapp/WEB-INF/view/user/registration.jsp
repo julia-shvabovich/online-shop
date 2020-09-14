@@ -4,16 +4,20 @@
     <title>Registration</title>
 </head>
 <body>
+<%@include file="../header.jsp" %>
 <h1>Please provide your user details</h1>
-
 <h4 style="color:red">${message}</h4>
-
-<form method="post" action="${pageContext.request.contextPath}/registration">
+<form style="padding-left: 30px" method="post" action="${pageContext.request.contextPath}/registration">
     Name <input type="text" name="name" required>
+    <br><br>
     Login <input type="text" name="login" required>
+    <br><br>
     Password <input type="password" name="password" required>
+    <br><br>
     Repeat your password <input type="password" name="repeat">
+    <br><br>
     <button type="submit">Register</button>
+    <br><br>
 </form>
 </body>
 </html>

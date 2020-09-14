@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>All products</title>
+    <title>Shopping cart</title>
 </head>
 <body>
 <%@include file="../header.jsp"%>
@@ -11,7 +11,7 @@
         <th><h4>ID</h4></th>
         <th><h4>Name</h4></th>
         <th><h4>Price</h4></th>
-        <th><h4>Buy</h4></th>
+        <th><h4>Remove</h4></th>
     </tr>
     <c:forEach var="product" items="${products}">
         <tr>
@@ -25,10 +25,17 @@
                 <h4><c:out value="${product.price}"/></h4>
             </td>
             <td>
-                <h4><a href="${pageContext.request.contextPath}/cart/add-product?id=${product.id}">Buy</a></h4>
+                <h4><a href="${pageContext.request.contextPath}/cart/delete?id=${product.id}">Remove</a></h4>
             </td>
         </tr>
     </c:forEach>
 </table>
+<form style="padding: 10px" action="${pageContext.request.contextPath}/orders/create" target="_self">
+    <button>Place an order</button>
+</form>
+<h3>
+    <a href="${pageContext.request.contextPath}/products/all">All products</a><br>
+    <a href="${pageContext.request.contextPath}/orders/history">Order history</a>
+</h3>
 </body>
 </html>
