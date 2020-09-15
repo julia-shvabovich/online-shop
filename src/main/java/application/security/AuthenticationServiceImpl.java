@@ -5,6 +5,7 @@ import application.lib.Inject;
 import application.lib.Service;
 import application.model.User;
 import application.service.UserService;
+import java.util.Optional;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
@@ -13,11 +14,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public User login(String login, String password) throws AuthenticationException {
-        User user = userService.findByLogin(login).orElseThrow(() ->
-                new AuthenticationException("Incorrect username or password"));
-        if (user.getPassword().equals(password)) {
-            return user;
+        Optional<User> user = userService.findByLogin(login);
+        if (user.isEmpty() || !user.get().getPassword().equals(password)) {
+            throw new AuthenticationException("Incorrect username or password");
         }
-        throw new AuthenticationException("Incorrect username or password");
+        return user.get();
     }
 }
