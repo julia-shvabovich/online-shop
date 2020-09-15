@@ -1,5 +1,6 @@
 package application.controller.order;
 
+import application.controller.user.LoginController;
 import application.lib.Injector;
 import application.service.OrderService;
 import application.service.ShoppingCartService;
@@ -12,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/orders/create")
 public class CompleteOrderController extends HttpServlet {
-    private static final Long USER_ID = 1L;
     private static final Injector injector = Injector.getInstance("application");
     private OrderService orderService =
             (OrderService) injector.getInstance(OrderService.class);
@@ -22,7 +22,8 @@ public class CompleteOrderController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        orderService.completeOrder(shoppingCartService.getByUserId(USER_ID));
+        Long id = (Long) req.getSession().getAttribute(LoginController.USER_ID);
+        orderService.completeOrder(shoppingCartService.getByUserId(id));
         resp.sendRedirect(req.getContextPath() + "/order/history");
     }
 }

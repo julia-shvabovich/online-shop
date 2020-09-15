@@ -1,6 +1,8 @@
 package application.controller.cart;
 
+import application.controller.user.LoginController;
 import application.lib.Injector;
+import application.model.ShoppingCart;
 import application.service.ProductService;
 import application.service.ShoppingCartService;
 import java.io.IOException;
@@ -22,8 +24,9 @@ public class AddProductToCartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        Long id = Long.valueOf(req.getParameter("id"));
-        shoppingCartService.addProduct(shoppingCartService.get(USER_ID), productService.get(id));
+        Long id = (Long) req.getSession().getAttribute(LoginController.USER_ID);
+        ShoppingCart cart = shoppingCartService.getByUserId(USER_ID);
+        shoppingCartService.addProduct(cart, productService.get(id));
         resp.sendRedirect(req.getContentType() + "/product/all");
     }
 }
