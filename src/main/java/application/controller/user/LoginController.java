@@ -14,8 +14,8 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
+    public static final String USER_ID = "userId";
     private static final Injector injector = Injector.getInstance("application");
-    private static final String USER_ID = "userId";
     private AuthenticationService authenticationService =
             (AuthenticationService) injector.getInstance(AuthenticationService.class);
 
