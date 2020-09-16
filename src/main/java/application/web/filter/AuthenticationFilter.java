@@ -19,7 +19,7 @@ public class AuthenticationFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         availablePages.add("/login");
-        availablePages.add("registration");
+        availablePages.add("/registration");
         availablePages.add("/");
         availablePages.add("/inject");
     }
