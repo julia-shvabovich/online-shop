@@ -14,9 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 
 public class AuthenticationFilter implements Filter {
     private static final String USER_ID = "userId";
+    private Set<String> availablePages = new HashSet<>();
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
+        availablePages.add("/login");
+        availablePages.add("registration");
+        availablePages.add("/");
+        availablePages.add("/inject");
     }
 
     @Override
@@ -25,10 +30,6 @@ public class AuthenticationFilter implements Filter {
             throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
-        Set<String> availablePages = new HashSet<>();
-        availablePages.add("/login");
-        availablePages.add("registration");
-        availablePages.add("/");
         String url = req.getServletPath();
         if (availablePages.contains(url)) {
             filterChain.doFilter(req, resp);
