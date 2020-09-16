@@ -48,14 +48,10 @@ public class AuthorizationFilter implements Filter {
             throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
-        String requestedUrl = req.getServletPath();
-        if (protectedUrls.get(requestedUrl) == null) {
-            filterChain.doFilter(req, resp);
-            return;
-        }
         Long userId = (Long) req.getSession().getAttribute(USER_ID);
-        User user = userService.get(userId);
-        if (isAuthorized(user, protectedUrls.get(requestedUrl))) {
+        if (!protectedUrls.containsKey(req.getServletPath())
+                || isAuthorized(userService.get(userId),
+                protectedUrls.get(req.getServletPath()))) {
             filterChain.doFilter(req, resp);
         } else {
             req.getRequestDispatcher("/WEB-INF/view/access-denied.jsp").forward(req, resp);
@@ -67,8 +63,8 @@ public class AuthorizationFilter implements Filter {
     }
 
     private boolean isAuthorized(User user, Set<Role.RoleName> authorizedRoles) {
-        for (Role.RoleName authorizedRole: authorizedRoles) {
-            for (Role userRole: user.getRoles()) {
+        for (Role.RoleName authorizedRole : authorizedRoles) {
+            for (Role userRole : user.getRoles()) {
                 if (authorizedRole.equals(userRole.getRoleName())) {
                     return true;
                 }
