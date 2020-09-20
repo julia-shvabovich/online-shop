@@ -2,11 +2,13 @@ package application.dao.impl;
 
 import application.dao.ProductDao;
 import application.db.Storage;
+import application.lib.Dao;
 import application.model.Product;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
+@Dao
 public class ProductDaoImpl implements ProductDao {
     @Override
     public Product create(Product product) {

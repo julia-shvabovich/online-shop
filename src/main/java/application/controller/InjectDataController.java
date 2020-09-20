@@ -23,6 +23,6 @@ public class InjectDataController extends HttpServlet {
         User admin = new User("admin", "admin", "12345");
         admin.setRoles(Set.of(Role.of("ADMIN")));
         userService.create(admin);
-        resp.sendRedirect(req.getContextPath() + "/");
+        req.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(req, resp);
     }
 }

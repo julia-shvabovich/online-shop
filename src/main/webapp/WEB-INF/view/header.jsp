@@ -72,9 +72,9 @@
                style="font-size: 1.5vw">Home</a>
         </li>
         <li class="nav-item active" style="position: absolute; right: 180px; top: 15px">
-            <a href="${pageContext.request.contextPath}/login"
+            <a href="${pageContext.request.contextPath}/registration"
                class="btn btn-outline-danger" role="button" aria-pressed="true"
-               style="font-size: 1.5vw">Log in</a>
+               style="font-size: 1.5vw">Sign up</a>
         </li>
         <li class="nav-item active" style="position: absolute; right: 30px; top: 15px">
             <a href="${pageContext.request.contextPath}/cart/products"
