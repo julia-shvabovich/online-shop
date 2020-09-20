@@ -52,11 +52,14 @@
     </tr>
     </tbody>
 </table>
-
 <h3 style="text-align: center">
     <a href="${pageContext.request.contextPath}/products/all"
        class="btn btn-outline-danger" role="button" aria-pressed="true"
        style="font-size: 2vw">See more</a>
+    <br><br>
+    <a href="${pageContext.request.contextPath}/logout"
+       class="btn btn-outline-danger" role="button" aria-pressed="true"
+       style="font-size: 2vw">Log out</a>
 </h3>
 </body>
 </html>

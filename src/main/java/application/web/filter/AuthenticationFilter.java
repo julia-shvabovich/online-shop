@@ -1,22 +1,27 @@
 package application.web.filter;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter("/*")
 public class AuthenticationFilter implements Filter {
     private static final String USER_ID = "userId";
+    private Set<String> availablePages = new HashSet<>();
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
+        availablePages.add("/login");
+        availablePages.add("/registration");
+        availablePages.add("/");
+        availablePages.add("/inject");
     }
 
     @Override
@@ -26,7 +31,7 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
         String url = req.getServletPath();
-        if (url.equals("/login") || url.equals("/registration")) {
+        if (availablePages.contains(url)) {
             filterChain.doFilter(req, resp);
             return;
         }

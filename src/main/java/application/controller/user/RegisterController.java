@@ -1,11 +1,13 @@
 package application.controller.user;
 
 import application.lib.Injector;
+import application.model.Role;
 import application.model.ShoppingCart;
 import application.model.User;
 import application.service.ShoppingCartService;
 import application.service.UserService;
 import java.io.IOException;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,6 +36,7 @@ public class RegisterController extends HttpServlet {
         String repeatPassword = req.getParameter("repeat");
         if (password.equals(repeatPassword)) {
             User user = new User(name, login, password);
+            user.setRoles(Set.of(Role.of("USER")));
             userService.create(user);
             shoppingCartService.create(new ShoppingCart(user.getId()));
             resp.sendRedirect(req.getContextPath() + "/");
