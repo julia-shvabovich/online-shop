@@ -5,7 +5,7 @@
 </head>
 <body>
 <%@include file="header.jsp" %>
-<h1 style="font-family: Kristi; font-size:4vw; padding-bottom: 10px">Handmade accessories: delivery all over the
+<h1 style="font-family: 'Dancing Script'; font-size:3.5vw; padding-bottom: 10px">Handmade accessories: delivery all over the
     world!</h1>
 <table style="position: center">
     <tbody>
