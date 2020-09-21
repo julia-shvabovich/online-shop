@@ -6,6 +6,5 @@ CREATE TABLE `internet_shop`.`products`
     `name`       VARCHAR(255)    NOT NULL,
     `price`      DOUBLE          NOT NULL,
     `deleted`    TINYINT         NULL DEFAULT 0,
-    PRIMARY KEY (`id`),
-    UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE
+    PRIMARY KEY (`id`)
 );
