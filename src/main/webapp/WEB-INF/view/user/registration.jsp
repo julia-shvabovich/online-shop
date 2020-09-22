@@ -26,6 +26,9 @@
     <h4 style="color:red; text-align: left">${message}</h4>
     <button onclick="location.href='${pageContext.request.contextPath}/'" type="submit" class="btn btn-outline-danger"
        style="font-size:1.5vw">Register</button>
+    <br><br>
+    <a href="${pageContext.request.contextPath}/login"
+           class="btn btn-outline-danger" role="button" aria-pressed="true">I already have an account</a>
 </form>
 </body>
 </html>

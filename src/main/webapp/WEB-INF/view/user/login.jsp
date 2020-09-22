@@ -23,6 +23,9 @@
     <button onclick="location.href='${pageContext.request.contextPath}/'" type="submit" class="btn btn-outline-danger"
             style="font-size:1.5vw">Log in
     </button>
+    <br><br>
+    <a href="${pageContext.request.contextPath}/registration"
+       class="btn btn-outline-danger" role="button" aria-pressed="true">I don't have an account</a>
 </form>
 </body>
 </html>
