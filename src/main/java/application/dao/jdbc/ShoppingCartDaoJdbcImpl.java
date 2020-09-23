@@ -19,7 +19,7 @@ import java.util.Optional;
 public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
     @Override
     public Optional<ShoppingCart> getByUserId(Long userId) {
-        ShoppingCart shoppingCart = new ShoppingCart();
+        ShoppingCart shoppingCart = null;
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement = connection.prepareStatement(
                          "SELECT * FROM shopping_carts WHERE user_id = ?")) {
