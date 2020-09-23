@@ -56,7 +56,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
 
     @Override
     public Optional<ShoppingCart> get(Long id) {
-        ShoppingCart cart = new ShoppingCart();
+        ShoppingCart cart = null;
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(
                         "SELECT * FROM shopping_carts WHERE deleted = FALSE AND id = ?")) {
