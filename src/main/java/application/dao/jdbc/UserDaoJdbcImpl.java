@@ -111,7 +111,7 @@ public class UserDaoJdbcImpl implements UserDao {
             throw new DataProcessingException("Couldn't update user " + user, e);
         }
         deleteRoles(user.getId());
-        setRoles(user);
+        insertRoles(user);
         user.setRoles(getRoles(user.getId()));
         return user;
     }
