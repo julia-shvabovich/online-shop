@@ -51,7 +51,7 @@ public class UserDaoJdbcImpl implements UserDao {
             if (resultSet.next()) {
                 user.setId(resultSet.getLong(1));
             }
-            return setRoles(user);
+            return insertRoles(user);
         } catch (SQLException e) {
             throw new DataProcessingException("Couldn't create user " + user, e);
         }
@@ -163,7 +163,7 @@ public class UserDaoJdbcImpl implements UserDao {
         }
     }
 
-    private User setRoles(User user) {
+    private User insertRoles(User user) {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(
                         "INSERT INTO users_roles(user_id, role_id) "
