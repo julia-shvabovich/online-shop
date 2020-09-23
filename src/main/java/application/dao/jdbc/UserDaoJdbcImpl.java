@@ -21,7 +21,7 @@ import java.util.Set;
 public class UserDaoJdbcImpl implements UserDao {
     @Override
     public Optional<User> findByLogin(String login) {
-        User user = new User();
+        User user = null;
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(
                         "SELECT * FROM users WHERE deleted = FALSE AND login = ?")) {
