@@ -2,13 +2,11 @@ package application.dao.impl;
 
 import application.dao.UserDao;
 import application.db.Storage;
-import application.lib.Dao;
 import application.model.User;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
-@Dao
 public class UserDaoImpl implements UserDao {
     @Override
     public User create(User user) {

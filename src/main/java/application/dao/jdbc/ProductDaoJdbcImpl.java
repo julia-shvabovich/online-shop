@@ -43,7 +43,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
                     "SELECT * FROM products WHERE deleted = FALSE AND id = ?");
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
+            if (resultSet.next()) {
                 product = getProductFromResultSet(resultSet);
             }
         } catch (SQLException e) {
