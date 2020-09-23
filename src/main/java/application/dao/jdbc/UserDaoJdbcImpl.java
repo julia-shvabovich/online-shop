@@ -59,7 +59,7 @@ public class UserDaoJdbcImpl implements UserDao {
 
     @Override
     public Optional<User> get(Long id) {
-        User user = new User();
+        User user = null;
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(
                         "SELECT * FROM users INNER JOIN users_roles ON id = user_id "
