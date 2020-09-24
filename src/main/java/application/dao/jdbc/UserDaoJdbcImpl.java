@@ -33,8 +33,11 @@ public class UserDaoJdbcImpl implements UserDao {
         } catch (SQLException e) {
             throw new DataProcessingException("Couldn't get user with login " + login, e);
         }
-        user.setRoles(getRoles(user.getId()));
-        return Optional.of(user);
+        if (user != null) {
+            user.setRoles(getRoles(user.getId()));
+            return Optional.of(user);
+        }
+        return Optional.empty();
     }
 
     @Override
@@ -51,10 +54,10 @@ public class UserDaoJdbcImpl implements UserDao {
             if (resultSet.next()) {
                 user.setId(resultSet.getLong(1));
             }
-            return insertRoles(user);
         } catch (SQLException e) {
             throw new DataProcessingException("Couldn't create user " + user, e);
         }
+        return insertRoles(user);
     }
 
     @Override
@@ -79,8 +82,7 @@ public class UserDaoJdbcImpl implements UserDao {
     @Override
     public List<User> getAll() {
         List<User> users = new ArrayList<>();
-        String query = "SELECT * FROM users INNER JOIN users_roles ur ON id = user_id "
-                + "WHERE deleted = false";
+        String query = "SELECT * FROM users WHERE deleted = false";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
             ResultSet resultSet = statement.executeQuery();
@@ -99,7 +101,8 @@ public class UserDaoJdbcImpl implements UserDao {
 
     @Override
     public User update(User user) {
-        String query = "UPDATE users SET name = ?, login = ?, password = ? WHERE id = ?";
+        String query = "UPDATE users SET name = ?, login = ?, password = ? "
+                + "WHERE id = ? AND deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, user.getName());
@@ -112,7 +115,6 @@ public class UserDaoJdbcImpl implements UserDao {
         }
         deleteRoles(user.getId());
         insertRoles(user);
-        user.setRoles(getRoles(user.getId()));
         return user;
     }
 

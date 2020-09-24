@@ -58,7 +58,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
     @Override
     public Optional<Order> get(Long id) {
         Order order = null;
-        String query = "SELECT * FROM orders WHERE id = ?";
+        String query = "SELECT * FROM orders WHERE id = ? AND deleted = FALSE";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, id);
@@ -107,16 +107,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
     @Override
     public boolean delete(Long id) {
-        String query = "DELETE FROM orders_products WHERE order_id = ?";
-        try (Connection connection = ConnectionUtil.getConnection();
-                PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setLong(1, id);
-            statement.executeUpdate();
-        } catch (SQLException exception) {
-            throw new DataProcessingException("Failed to delete the order's "
-                    + "products with id: " + id, exception);
-        }
-        query = "UPDATE orders SET deleted = true WHERE id = ?";
+        String query = "UPDATE orders SET deleted = true WHERE id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, id);
