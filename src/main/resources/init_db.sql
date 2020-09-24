@@ -109,5 +109,7 @@ INSERT INTO `roles`(name)
 VALUES ('USER');
 INSERT INTO `users`(name, login, password)
 VALUES ('admin', 'admin', '12345');
+INSERT INTO `users_roles`(user_id, role_id)
+VALUES (1, 2);
 INSERT INTO 'products' (name, price)
 VALUES ('test', 100);
