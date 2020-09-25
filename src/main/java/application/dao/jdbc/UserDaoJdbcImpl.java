@@ -75,9 +75,7 @@ public class UserDaoJdbcImpl implements UserDao {
         } catch (SQLException e) {
             throw new DataProcessingException("Couldn't get user with id " + id, e);
         }
-        if (user != null) {
-            insertRoles(user);
-        }
+        user.setRoles(getRoles(user.getId()));
         return Optional.of(user);
     }
 
