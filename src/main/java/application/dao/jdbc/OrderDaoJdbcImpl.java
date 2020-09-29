@@ -20,7 +20,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
     @Override
     public List<Order> getUserOrders(Long userId) {
         List<Order> orders = new ArrayList<>();
-        String query = "SELECT * FROM orders WHERE user_id = ?";
+        String query = "SELECT * FROM orders WHERE user_id = ? AND deleted = false";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, userId);
@@ -69,8 +69,11 @@ public class OrderDaoJdbcImpl implements OrderDao {
         } catch (SQLException e) {
             throw new DataProcessingException("Couldn't get order with id " + id, e);
         }
-        order.setProducts(getProducts(order.getId()));
-        return Optional.of(order);
+        if (order != null) {
+            order.setProducts(getProducts(order.getId()));
+            return Optional.of(order);
+        }
+        return Optional.empty();
     }
 
     @Override
@@ -156,9 +159,9 @@ public class OrderDaoJdbcImpl implements OrderDao {
         }
     }
 
-    private Order getOrderFromResultSet(ResultSet rs) throws SQLException {
-        Long orderId = rs.getLong("id");
-        Long userId = rs.getLong("user_id");
+    private Order getOrderFromResultSet(ResultSet resultSet) throws SQLException {
+        Long orderId = resultSet.getLong("id");
+        Long userId = resultSet.getLong("user_id");
         return new Order(orderId, userId);
     }
 }
