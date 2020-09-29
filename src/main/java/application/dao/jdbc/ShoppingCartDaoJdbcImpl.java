@@ -34,9 +34,8 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
         }
         if (cart != null) {
             cart.setProducts(getProducts(cart.getId()));
-            return Optional.of(cart);
         }
-        return Optional.empty();
+        return Optional.ofNullable(cart);
     }
 
     @Override
