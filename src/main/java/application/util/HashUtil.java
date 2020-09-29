@@ -1,6 +1,5 @@
 package application.util;
 
-import application.model.User;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -28,13 +27,5 @@ public class HashUtil {
             throw new RuntimeException("Couldn't hash the password", e);
         }
         return hashedPassword.toString();
-    }
-
-    public static boolean isValid(String password, User user) {
-        User userFromDB = new User();
-        byte[] salt = user.getSalt();
-        userFromDB.setPassword(hashPassword(password, salt));
-        userFromDB.setSalt(salt);
-        return hashPassword(password, salt).equals(userFromDB.getPassword());
     }
 }
