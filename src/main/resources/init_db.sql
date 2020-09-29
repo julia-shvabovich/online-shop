@@ -22,6 +22,7 @@ CREATE TABLE `internet_shop`.`users`
     `name`     VARCHAR(255) NOT NULL,
     `login`    VARCHAR(255) NOT NULL,
     `password` VARCHAR(255) NOT NULL,
+    `salt`     VARBINARY(16) NOT NULL,
     `deleted`  TINYINT GENERATED ALWAYS AS (0) VIRTUAL,
     PRIMARY KEY (`id`)
 );
