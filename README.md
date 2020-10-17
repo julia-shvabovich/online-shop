@@ -1,30 +1,47 @@
-1. Create your own repository
-2. Create models: Product, User, ShoppingCart, Order. Use UML diagram (models) for this, see below.
-3. Create DAO and application.service layer for Product application.model. You can see all project structure at the UML diagram (project structure).
-4. Add CRUD operations into ProductDao.
-5. Use Storage class as a persistence layer.
-6. Do not forget to use your own annotation Dao.
-7. Use some static variable that will incrementally generate you an id for each application.model
-8. Return Optional when you want return null in DAO. For example public Optional<User> get(Long id);
-9. Add class application.Application with main method where you are invoking all your methods from application.service
-10. Add new injector to your project.
+### Main idea
+A secured online shop with basic functionality based on the MySQL. The project represents client - server architecture.
+The shop is available only for authenticated users. Authorization and authentication are performed in web filters. 
+Default role for registered user is `USER`, admins must be added by system administrator.
 
-ProductDao
-- Product create(Product product);
-- Optional<Product> get(Long id);
-- List<Product> getAll();
-- Product update(Product product);
-- boolean delete(Long id);
+_____________
 
-ProductService
-- Product create(Product product);
-- Product get(Long id);
-- List<Product> getAll();
-- Product update(Product product);
-- boolean delete(Long id);
+### Client capabilities:
+- registration, logging in and out;
+- looking through the store items;
+- adding items to the shopping cart;
+- deleting items from the cart;
+- placing orders.
 
-How my models should be related one with each other?
-User does not have any relations to ShoppingCart, Order or Product.
-Product will not have any relations to ShoppingCart, Order or User.
-ShoppingCart will have a relation with List<Product> products and User user.
-Order will have relation with List<Product> products and User user.
+_____________
+
+### Admin capabilities:
+- logging in and out;
+- looking through the users list;
+- deleting users;
+- looking through the orders list, marking orders complete;
+- managing store's assortment;
+
+_____________
+
+### Technologies Used
+- Java 11
+- Maven Checkstyle Plugin
+- Javax Servlet API 3.1.0
+- JSTL 1.2
+- JSP
+- Apache Tomcat
+- Mysql Connector Java 8.0.21
+- Bootstrap
+
+____________
+
+### To run the project, you need:
+- clone the project into your local folder and open the project in an IDE;
+- configure Tomcat: deployment: `war_exploded`, context address: `"/"`;
+- copy the script from `init_db.sql` to the MySQL Workbench;
+- insert your MySQL username and login in the `ConnectionUtil` class.
+
+### For authorization as an ADMIN:
+- login: admin
+- password: 12345
+- visit page `localhost:8080/admin`
